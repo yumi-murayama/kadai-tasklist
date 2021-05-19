@@ -29,10 +29,10 @@ class TasksController extends Controller
      */
     public function create()
     {
-        $tasks = new Task;
+        $task = new Task;
         
         return view('tasks.create', [
-            'tasks' => $tasks,
+            'task' => $task,
         ]);
     }
     
@@ -44,9 +44,10 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        $tasks = new Task;
-        $tasks->content = $request->content;
-        $tasks->save();
+        $task = new Task;
+        $task->status = $request->status;
+        $task->content = $request->content;
+        $task->save();
          
         return redirect('/');
          
@@ -75,9 +76,9 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        $tasks = Task::findOrFail($id);
+        $task = Task::findOrFail($id);
         return view('tasks.edit', [
-            'tasks' => $tasks,
+            'task' => $task,
         ]);
     }
     
@@ -90,10 +91,11 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $tasks = Task::findOrFail($id);
-         
-        $tasks->content = $request->content;
-        $tasks->save();
+        $task = Task::findOrFail($id);
+        
+        $task->status = $request->status;
+        $task->content = $request->content;
+        $task->save();
          
         return redirect('/');
     }
@@ -106,9 +108,9 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        $tasks = Task::findOrFail($id);
+        $task = Task::findOrFail($id);
         
-        $tasks->delete();
+        $task->delete();
         
         return redirect('/');
     }
